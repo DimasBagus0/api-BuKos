@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,12 @@ use App\Http\Controllers\API\AuthController;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
+
+Route::post('store', [ProductController::class, 'store']);
+Route::get('product', [ProductController::class, 'product']);
+// Route::put('update', [ProductController::class, 'update']);
+// Route::get('getproduct',[ProductController::class, 'getproduct']);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -22,6 +22,7 @@ class AuthController extends Controller
             'confirm_password' => 'required|same:password'
         ]);
 
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,

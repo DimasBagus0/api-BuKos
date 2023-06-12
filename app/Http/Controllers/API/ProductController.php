@@ -93,9 +93,9 @@ class ProductController extends Controller
                 $fotoPemilik = $this->generateRandomString();
                 $extension = $request->foto_kos->extension();
 
-                Storage::putFileAs('public/foto', $request->foto_pemilik, $fotoPemilik.'.'.$extension);
+                Storage::putFileAs('public/person', $request->foto_pemilik, $fotoPemilik.'.'.$extension);
             }
-                $request['foto_kos'] = $fileName.'.'.$extension;
+                $request['foto_kos'] = $fotoKos.'.'.$extension;
                 $request['foto_pemilik'] = $fotoPemilik.'.'.$extension;
 
                 $product = Product::create([

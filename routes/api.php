@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,14 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
 
 Route::post('store', [ProductController::class, 'store']);
+
 Route::get('product', [ProductController::class, 'product']);
 // Route::put('update', [ProductController::class, 'update']);
 // Route::get('getproduct',[ProductController::class, 'getproduct']);
 
+Route::get('review', [ReviewController::class, 'review']);
+Route::post('addreview', [ReviewController::class, 'addreview']);
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctupm')->get('/user', function (Request $request) {
     return $request->user();
 });

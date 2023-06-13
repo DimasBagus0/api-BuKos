@@ -24,7 +24,7 @@ class ReviewController extends Controller
             'succes' => true,
             'message' => 'List data Product',
             'error' => null,
-            'data' => $review
+            'reviews' => $review
         ], Response::HTTP_OK);
         }
         catch (\Throwable $th){
@@ -32,7 +32,7 @@ class ReviewController extends Controller
             'succes' => false,
             'message' => 'server sedang error',
             'error' => $th->getMessage(),
-            'data' => null,
+            'reviews' => null,
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -67,22 +67,26 @@ class ReviewController extends Controller
                 'succes' => false,
                 'message' => 'Data Tidak Valid',
                 'error' => $validator->errors()->first(),
-                'data' => null,
+                'reviews' => null,
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+
+        $file_request = $request->file('profil_review');
+        $file_name = $file_request->getClientOriginalName();
+
         try{
-            if($request->profil_review){
+            // if($request->profil_review){
 
-                $profilReview = $this->generateRandomString();
-                $extension = $request->profil_review->extension();
+            //     $profilReview = $this->generateRandomString();
+            //     $extension = $request->profil_review->extension();
 
-                Storage::putFileAs('public/person', $request->profil_review, $profilReview.'.'.$extension);
-            }
+            //     Storage::putFileAs('public/person', $request->profil_review, $profilReview.'.'.$extension);
+            // }
 
-            $request['profil_review'] = $profilReview.'.'.$extension;
+            // $request['profil_review'] = $profilReview.'.'.$extension;
 
             $review = Review::create([
-            'profil_review'=> $profilReview,
+            'profil_review'=> $file_request->storeAs('person', $file_name),
             'nama_review'=> $request->nama_review,
             'review_desc'=> $request->review_desc,
             ]);
@@ -94,7 +98,7 @@ class ReviewController extends Controller
         return response()->json([
             'succes' => true,
             'message' => 'Data Berhasil Di Tambahkan',
-            'data' => $data3,
+            'reviews' => $data3,
         ], Response::HTTP_CREATED);
 
     }catch (\Throwable $th){
@@ -102,7 +106,7 @@ class ReviewController extends Controller
             'succes' => false,
             'message' => 'server sedang error',
             'error' => $th->getMessage(),
-            'data' => null,
+            'reviews' => null,
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
     }
@@ -150,16 +154,6 @@ class ReviewController extends Controller
     public function destroy(Review $review)
     {
         //
-    }
-
-    function generateRandomString($length = 30) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[random_int(0, $charactersLength - 1)];
-        }
-        return $randomString;
     }
 }
 

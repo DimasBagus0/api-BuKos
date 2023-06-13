@@ -25,7 +25,7 @@ class ProductController extends Controller
             'succes' => true,
             'message' => 'List data Product',
             'error' => null,
-            'data' => $product
+            'products' => $product
         ], Response::HTTP_OK);
         }
         catch (\Throwable $th){
@@ -33,7 +33,7 @@ class ProductController extends Controller
             'succes' => false,
             'message' => 'server sedang error',
             'error' => $th->getMessage(),
-            'data' => null,
+            'products' => null,
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -71,9 +71,15 @@ class ProductController extends Controller
                 'succes' => false,
                 'message' => 'Data Tidak Valid',
                 'error' => $validator->errors()->first(),
-                'data' => null,
+                'products' => null,
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+
+        $file_request = $request->file('foto_pemilik');
+        $file_name = $file_request->getClientOriginalName();
+
+        $file_fotokos = $request->file('foto_kos');
+        $name_fotokos = $file_fotokos->getClientOriginalName();
 
         try{
             // if ($request->hasFile('foto_kos'))
@@ -81,26 +87,9 @@ class ProductController extends Controller
             //     $fotoPath = $foto_kos->store('public/foto');
             //     $fotoUrl = Storage::url($fotoPath);
 
-            if($request->foto_kos){
-
-                $fotoKos = $this->generateRandomString();
-                $extension = $request->foto_kos->extension();
-
-                Storage::putFileAs('public/foto', $request->foto_kos, $fotoKos.'.'.$extension);
-            }
-            if($request->foto_pemilik){
-
-                $fotoPemilik = $this->generateRandomString();
-                $extension = $request->foto_kos->extension();
-
-                Storage::putFileAs('public/person', $request->foto_pemilik, $fotoPemilik.'.'.$extension);
-            }
-                $request['foto_kos'] = $fotoKos.'.'.$extension;
-                $request['foto_pemilik'] = $fotoPemilik.'.'.$extension;
-
                 $product = Product::create([
-                'foto_kos'=> $fotoKos,
-                'foto_pemilik'=> $fotoPemilik,
+                'foto_kos'=> $file_fotokos->storeAs('fotokos', $name_fotokos),
+                'foto_pemilik'=> $file_request->storeAs('person', $file_name),
                 'nama_pemilik'=> $request->nama_pemilik,
                 'nama_kos'=> $request->nama_kos,
                 'lokasi_kos'=> $request->lokasi_kos,
@@ -114,7 +103,7 @@ class ProductController extends Controller
             return response()->json([
                 'succes' => true,
                 'message' => 'Data Berhasil Di Tambahkan',
-                'data' => $data2,
+                'products' => $data2,
             ], Response::HTTP_CREATED);
 
         }
@@ -124,7 +113,7 @@ class ProductController extends Controller
                 'succes' => false,
                 'message' => 'server sedang error',
                 'error' => $th->getMessage(),
-                'data' => null,
+                'products' => null,
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -219,18 +208,4 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(product $product)
-    {
-        //
-    }
-
-    function generateRandomString($length = 30) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[random_int(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
 }

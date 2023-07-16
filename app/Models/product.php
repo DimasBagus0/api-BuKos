@@ -17,6 +17,12 @@ class product extends Model
         'nama_kos',
         'lokasi_kos',
         'harga_kos',
+        'spesifikasi_kamar',
+        'fasilitas_kamar',
+        'fasilitas_umum',
+        'peraturan_kamar',
+        'peraturan_kos',
+        'tipe_kamar'
 
     ];
 }

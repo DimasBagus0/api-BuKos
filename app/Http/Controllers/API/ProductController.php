@@ -62,7 +62,14 @@ class ProductController extends Controller
             'nama_pemilik'=>['required', 'string', 'max:50'],
             'nama_kos'=>['required', 'string', 'max:50'],
             'lokasi_kos'=>['required', 'string',],
-            'harga_kos'=>['required', 'integer',],
+            'harga_kos'=>['required', 'double',],
+            'spesifikasi_kamar'=>['string',],
+            'fasilitas_kamar'=>['string',],
+            'fasilitas_umum'=>['string',],
+            'peraturan_kamar'=>['string',],
+            'peraturan_kos'=>['string',],
+            'tipe_kamar'=>['string',]
+
 
         ]);
 
@@ -93,7 +100,14 @@ class ProductController extends Controller
                 'nama_pemilik'=> $request->nama_pemilik,
                 'nama_kos'=> $request->nama_kos,
                 'lokasi_kos'=> $request->lokasi_kos,
-                'harga_kos'=> $request->harga_kos
+                'harga_kos'=> $request->harga_kos,
+                'spesifikasi_kamar'=> $request->spesifikasi_kamar,
+                'fasilitas_kamar'=> $request->fasilitas_kamar,
+                'fasilitas_umum'=> $request->fasilitas_umum,
+                'peraturan_kamar'=> $request->peraturan_kamar,
+                'peraturan_kos'=> $request->peraturan_kos,
+                'tipe_kamar'=> $request->tipe_kamar
+
                 ]);
 
 

@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'phone',
         'password',
+        'role'
 
     ];
 
@@ -36,6 +37,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+    
+    public function hasRole($roles)
+{
+    return in_array($this->role, (array) $roles);
+}
+
 
     /**
      * The attributes that should be cast.

@@ -17,23 +17,23 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
-            [
-                'name' => 'Dimas',
-                'email' => 'dimas@gmail.com',
-                'password' => 'DimasB@gus1',
-            ],
-            [
-                'name' => 'Antariksa',
-                'email' => 'antariksa@gmail.com',
-                'password' => 'Antariks@3',
-            ],
-            // Tambahkan pengguna lain sesuai kebutuhan Anda
-        ];
+        // $users = [
+        //     [
+        //         'name' => 'Dimas',
+        //         'email' => 'dimas@gmail.com',
+        //         'password' => 'DimasB@gus1',
+        //     ],
+        //     [
+        //         'name' => 'Antariksa',
+        //         'email' => 'antariksa@gmail.com',
+        //         'password' => 'Antariks@3',
+        //     ],
+        //     // Tambahkan pengguna lain sesuai kebutuhan Anda
+        // ];
 
-        foreach ($users as $userData) {
-            $userData['password'] = Hash::make($userData['password']);
-            User::create($userData);
-        }
+        // foreach ($users as $userData) {
+        //     $userData['password'] = Hash::make($userData['password']);
+        //     User::create($userData);
+        // }
     }
 }

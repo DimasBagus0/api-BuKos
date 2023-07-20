@@ -62,7 +62,7 @@ class ProductController extends Controller
             'nama_pemilik'=>['required', 'string', 'max:50'],
             'nama_kos'=>['required', 'string', 'max:50'],
             'lokasi_kos'=>['required', 'string',],
-            'harga_kos'=>['required', 'integer',],
+            'harga_kos'=>['required', 'double',],
             'spesifikasi_kamar'=>['string',],
             'fasilitas_kamar'=>['string',],
             'fasilitas_umum'=>['string',],

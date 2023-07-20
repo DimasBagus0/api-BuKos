@@ -14,12 +14,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = FacadesValidator::make($request->all(), [
-            'name' => 'required',
+            'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|numeric|min:15|unique:users,phone',
-            'password' => 'required',
+            'phone' => 'required|numeric|min:10|max:13|unique:users,phone|',
+            'password' => 'required|min:8',
             'confirm_password' => 'required|same:password',
             'role' => 'sometimes|in:user,owner',
+        ],[
+            'email.unique' => 'Email sudah digunakan.',
+            'phone.unique' => 'Nomor telepon sudah digunakan.',
         ]);
 
         if ($validator->fails()) {
@@ -61,6 +64,19 @@ class AuthController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $auth = Auth::user();
+
+            // Jika role "user" mencoba login ke halaman owner atau sebaliknya, tolak login
+            if (
+                ($auth->role === 'user' && \Illuminate\Support\Facades\Route::currentRouteName() === 'owner.login') ||
+                ($auth->role === 'owner' && \Illuminate\Support\Facades\Route::currentRouteName() === 'user.login')
+            ) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Anda tidak memiliki izin untuk login ke halaman ini.',
+                    'data' => null
+                ], 403); // Kode status 403 menunjukkan akses ditolak
+            }
+
             $success['token'] = $auth->createToken('auth_token')->plainTextToken;
             $success['name'] = $auth->name;
             $success['email'] = $auth->email;

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
 
 class ProductController extends Controller
@@ -25,7 +26,7 @@ class ProductController extends Controller
                 'success' => true,
                 'message' => 'List data Product',
                 'error' => null,
-                'products' => $product
+                'product' => $product
             ], Response::HTTP_OK);
         }
         catch (\Throwable $th){
@@ -33,7 +34,7 @@ class ProductController extends Controller
                 'success' => false,
                 'message' => 'Server sedang error',
                 'error' => $th->getMessage(),
-                'products' => null,
+                'product' => null,
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -62,7 +63,7 @@ class ProductController extends Controller
             'nama_pemilik'=>['required', 'string', 'max:50'],
             'nama_kos'=>['required', 'string', 'max:50'],
             'lokasi_kos'=>['required', 'string',],
-            'harga_kos'=>['required', 'double',],
+            'harga_kos'=>['required', 'numeric',],
             'spesifikasi_kamar'=>['string',],
             'fasilitas_kamar'=>['string',],
             'fasilitas_umum'=>['string',],
@@ -76,7 +77,7 @@ class ProductController extends Controller
                 'success' => false,
                 'message' => 'Data Tidak Valid',
                 'error' => $validator->errors()->first(),
-                'products' => null,
+                'product' => null,
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -86,7 +87,7 @@ class ProductController extends Controller
                 'success' => false,
                 'message' => 'Anda tidak memiliki izin untuk menambahkan produk.',
                 'error' => 'Unauthorized',
-                'products' => null,
+                'product' => null,
             ], Response::HTTP_UNAUTHORIZED);
         }
 
@@ -120,7 +121,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Data Berhasil Di Tambahkan',
-                'products' => $data2,
+                'product' => $data2,
             ], Response::HTTP_CREATED);
 
         } catch (\Throwable $th){
@@ -128,7 +129,7 @@ class ProductController extends Controller
                 'success' => false,
                 'message' => 'Server sedang error',
                 'error' => $th->getMessage(),
-                'products' => null,
+                'product' => null,
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -149,12 +150,20 @@ class ProductController extends Controller
             $query->where('tipe_kamar', $filterByType);
         }
 
-        $products = $query->get();
+        $product = $query->get();
+
+        if ($product->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Kos Tidak Di Temukan',
+                'data' => null,
+            ]);
+        }
 
         return response()->json([
             'success' => true,
             'message' => 'Hasil pencarian',
-            'data' => $products
+            'data' => $product
         ]);
     }
 
@@ -165,26 +174,25 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function getproduct(Product $product)
-    {
-        // try
-        // {
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'detail data Product',
-        //     'error' => null,
-        //     'data' => $product
-        // ], Response::HTTP_OK);
-        // }
-        // catch (\Throwable $th){
-        // return response()->json([
-        //     'success' => false,
-        //     'message' => 'Server sedang error',
-        //     'error' => $th->getMessage(),
-        //     'data' => null,
-        // ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        // }
+    public function getproduct($id)
+{
+    $product = Product::find($id);
+
+    if (!$product) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Kos Tidak Di Temukan',
+            'data' => null,
+        ], Response::HTTP_NOT_FOUND);
     }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Detail data Product',
+        'data' => $product,
+    ], Response::HTTP_OK);
+}
+
 
     /**
      * Show the form for editing the specified resource.
@@ -194,7 +202,30 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
-        //
+        $user = Auth::user();
+    if ($user->role !== 'owner') { // Pemeriksaan apakah peran pengguna adalah "owner"
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda tidak memiliki izin untuk melakukan tindakan ini.',
+            'error' => 'Unauthorized',
+            'product' => null,
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+        try {
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil Mengedit Product',
+                'data' => $product
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Server sedang error',
+                'error' => $th->getMessage(),
+                'data' => null,
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -206,41 +237,92 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $product = Product::findOrFail($id);
-        // $validator = Validator::make($request->all(), [
-        //     'foto_kos'=>'required|string',
-        //     'foto_pemilik'=>'required|string',
-        //     'nama_pemilik'=>'required|string', 'max:50',
-        //     'nama_kos'=>'required|string', 'max:50',
-        //     'lokasi_kos'=>'required|string',
-        //     'harga_kos'=>'required|integer',
-        // ]);
+        $product = Product::findOrFail($id);
+        $validator = Validator::make($request->all(), [
+            // ... Aturan validasi Anda ...
+        ]);
 
-        // if($validator->fails()){
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Terdapat Data Tidak Valid',
-        //         'error'=> $validator->errors()->first()
-        //     ], Response::HTTP_UNPROCESSABLE_ENTITY);
-        // }
-        // try{
-        //     $product->update($request->all());
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Berhasil Mengubah Product',
-        //         'error' => null,
-        //         'data' => $product
-        //     ], Response::HTTP_CREATED);
-        // }
-        // catch(\Throwable$th) {
-        //     return Response()->json([
-        //         'success' => false,
-        //         'message'=> 'Terjadi kesalahan pada server',
-        //         'error' => $th->getMessage(),
-        //         'data' => null
-        //     ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        // }
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Tidak Valid',
+                'error' => $validator->errors()->first(),
+                'product' => null,
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        // Pastikan hanya pemilik yang bisa mengedit produk
+        $user = Auth::user();
+    if ($user->role !== 'owner') { // Pemeriksaan apakah peran pengguna adalah "owner"
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda tidak memiliki izin untuk melakukan tindakan ini.',
+            'error' => 'Unauthorized',
+            'product' => null,
+        ], Response::HTTP_UNAUTHORIZED);
     }
+
+        try {
+            // Memperbarui data produk berdasarkan permintaan
+            $product->update($request->all());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Berhasil Diperbarui',
+                'product' => $product,
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan pada server',
+                'error' => $th->getMessage(),
+                'product' => null,
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function destroy($id)
+{  $product = Product::find($id);
+
+    if (!$product) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Product not found',
+            'product' => null,
+        ], Response::HTTP_NOT_FOUND);
+    }
+
+    // Pastikan hanya pemilik yang bisa menghapus produk
+    $user = Auth::user();
+    if ($user->role !== 'owner') { // Pemeriksaan apakah peran pengguna adalah "owner"
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda tidak memiliki izin untuk melakukan tindakan ini.',
+            'error' => 'Unauthorized',
+            'product' => null,
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    try {
+        // Hapus produk dari database
+        $product->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Product Berhasil Di Hapus',
+            'product' => null,
+        ], Response::HTTP_OK);
+    } catch (\Throwable $th) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Server Sedang Error',
+            'error' => $th->getMessage(),
+            'product' => null,
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+}
+
+}
 
     /**
      * Remove the specified resource from storage.
@@ -248,4 +330,4 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-}
+

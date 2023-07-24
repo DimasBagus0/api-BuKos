@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -84,8 +85,18 @@ class ReviewController extends Controller
             // }
 
             // $request['profil_review'] = $profilReview.'.'.$extension;
+            $user = Auth::user();
+            if ($user->role !== 'user') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Anda tidak memiliki izin untuk menambahkan produk.',
+                    'error' => 'Unauthorized',
+                    'reviews' => null,
+                ], Response::HTTP_UNAUTHORIZED);
+            }
 
             $review = Review::create([
+            'user_id' => $user->id,
             'profil_review'=> $file_request->storeAs('person', $file_name),
             'nama_review'=> $request->nama_review,
             'review_desc'=> $request->review_desc,

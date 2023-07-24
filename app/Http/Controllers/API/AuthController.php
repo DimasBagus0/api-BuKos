@@ -16,7 +16,7 @@ class AuthController extends Controller
         $validator = FacadesValidator::make($request->all(), [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|numeric|min:10|max:13|unique:users,phone|',
+            'phone' => 'required|numeric|min:10|unique:users,phone|',
             'password' => 'required|min:8',
             'confirm_password' => 'required|same:password',
             'role' => 'sometimes|in:user,owner',

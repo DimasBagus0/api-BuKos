@@ -16,9 +16,6 @@ use App\Http\Controllers\OrderController;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 */
-// Route::post('register', [AuthController::class, 'register']);
-// Route::post('login', [AuthController::class, 'login']);
-// Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
 
 // Grup rute untuk pengguna dengan peran 'user'
 Route::prefix('user')->name('user.')->group(function () {
@@ -35,20 +32,27 @@ Route::prefix('owner')->name('owner.')->group(function () {
     Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logoutOwner'])->name('logout');
     Route::middleware('auth:sanctum')->get('/detail', [AuthController::class, 'getOwnerDetail'])->name('owner.detail');
 });
-  Route::middleware(['auth:sanctum', 'role:owner'])->post('store', [ProductController::class, 'store']);
 
-Route::get('product', [ProductController::class, 'product']);
+    //product
+  Route::middleware(['auth:sanctum', 'role:owner'])->post('/addproduct', [ProductController::class, 'store']);
+  Route::get('/allproduct', [ProductController::class, 'product']);
+  Route::get('/product/search', [ProductController::class, 'search']);
+  Route::middleware('auth:sanctum')->get('/getoneproduct/{id}', [ProductController::class, 'getproduct']);
+  Route::middleware('auth:sanctum')->put('/product/{product}/edit',[ProductController::class, 'edit']);
+  Route::middleware('auth:sanctum')->delete('/products/{id}', [ProductController::class, 'destroy']);
+
+    //review
+  Route::middleware(['auth:sanctum', 'role:user'])->post('addreview', [ReviewController::class, 'addreview']);
+  Route::get('review', [ReviewController::class, 'review']);
+
+
 // Route::get('search/{nama_kos}', [ProductController::class, 'search']);
-Route::get('/products/search', [ProductController::class, 'search']);
-
-
 // Route::put('update', [ProductController::class, 'update']);
 // Route::get('getproduct',[ProductController::class, 'getproduct']);
-
 //review
-Route::get('review', [ReviewController::class, 'review']);
-Route::post('addreview', [ReviewController::class, 'addreview']);
+// Route::post('addreview', [ReviewController::class, 'addreview']);
 
+//getuser
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

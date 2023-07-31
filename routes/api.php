@@ -37,9 +37,10 @@ Route::prefix('owner')->name('owner.')->group(function () {
   Route::middleware(['auth:sanctum', 'role:owner'])->post('/addproduct', [ProductController::class, 'store']);
   Route::get('/allproduct', [ProductController::class, 'product']);
   Route::get('/product/search', [ProductController::class, 'search']);
-  Route::middleware('auth:sanctum')->get('/getoneproduct/{id}', [ProductController::class, 'getproduct']);
+  Route::get('/getoneproduct/{id}', [ProductController::class, 'getproduct']);
   Route::middleware('auth:sanctum')->put('/product/{product}/edit',[ProductController::class, 'edit']);
-  Route::middleware('auth:sanctum')->delete('/products/{id}', [ProductController::class, 'destroy']);
+  Route::middleware('auth:sanctum')->delete('/product/{id}', [ProductController::class, 'destroy']);
+  Route::middleware('auth:sanctum')->post('/product/{id}/favorite', [ProductController::class, 'favorite']);
 
     //review
   Route::middleware(['auth:sanctum', 'role:user'])->post('addreview', [ReviewController::class, 'addreview']);

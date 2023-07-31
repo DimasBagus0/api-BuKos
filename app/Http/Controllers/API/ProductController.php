@@ -58,7 +58,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'foto_kos'=>'required|image|mimes:jpeg,png,svg,jpg,gif,jfif|max:3000',
+            'foto_kos' => 'required|image|mimes:jpeg,png,svg,jpg,gif,jfif|max:3000',
             'foto_pemilik'=>'required|image|mimes:jpeg,png,svg,jpg,gif,jfif|max:3000',
             'nama_pemilik'=>['required', 'string', 'max:50'],
             'nama_kos'=>['required', 'string', 'max:50'],
@@ -69,7 +69,8 @@ class ProductController extends Controller
             'fasilitas_umum'=>['string',],
             'peraturan_kamar'=>['string',],
             'peraturan_kos'=>['string',],
-            'tipe_kamar'=>['string',]
+            'tipe_kamar'=>['string',],
+            'favorite' => [],
         ]);
 
         if($validator->fails()){
@@ -95,6 +96,7 @@ class ProductController extends Controller
 
         $file_request = $request->file('foto_pemilik');
         $file_name = $file_request->getClientOriginalName();
+
 
         $file_fotokos = $request->file('foto_kos');
         $name_fotokos = $file_fotokos->getClientOriginalName();
@@ -239,7 +241,6 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $validator = Validator::make($request->all(), [
-            // ... Aturan validasi Anda ...
         ]);
 
         if ($validator->fails()) {
@@ -281,6 +282,75 @@ class ProductController extends Controller
         }
     }
 
+    // Pada function favorite:
+public function favorite($id)
+{
+    $user = Auth::user();
+
+    // Pastikan hanya pengguna yang terautentikasi yang bisa mengakses endpoint ini
+    if (!$user) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda harus login untuk menambahkan ke favorit.',
+            'product' => null,
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    $product = Product::find($id);
+
+    // Periksa apakah produk ditemukan
+    if (!$product) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Produk tidak ditemukan.',
+            'product' => null,
+        ], Response::HTTP_NOT_FOUND);
+    }
+
+    // Cek apakah produk sudah ada di daftar favorit pengguna
+    $isFavorited = $user->favorites()->where('product_id', $product->id)->exists();
+
+    // Lakukan tindakan berdasarkan status favorit
+    if ($isFavorited) {
+        // Remove from favorites
+        $user->favorites()->detach($product->id);
+    } else {
+        // Add to favorites
+        $user->favorites()->attach($product->id);
+    }
+
+    // Update status favorit pada model Product
+    $product->update(['favorited' => !$isFavorited]);
+
+    return response()->json([
+        'success' => true,
+        'message' => $isFavorited ? 'Produk dihapus dari favorit.' : 'Produk ditambahkan ke favorit.',
+        'product' => $product,
+    ], Response::HTTP_OK);
+}
+
+public function getFavorites()
+{
+    $user = Auth::user();
+
+    if (!$user) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda harus login untuk melihat produk favorit.',
+            'favorites' => null,
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    $favorites = $user->favorites()->get();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Daftar produk favorit.',
+        'favorites' => $favorites,
+    ], Response::HTTP_OK);
+}
+
+
     public function destroy($id)
 {  $product = Product::find($id);
 
@@ -310,7 +380,7 @@ class ProductController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Product Berhasil Di Hapus',
-            'product' => null,
+
         ], Response::HTTP_OK);
     } catch (\Throwable $th) {
         return response()->json([

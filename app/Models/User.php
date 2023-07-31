@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -37,11 +38,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
-    
+
     public function hasRole($roles)
 {
     return in_array($this->role, (array) $roles);
 }
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class, 'user_favorites');
+    }
 
 
     /**

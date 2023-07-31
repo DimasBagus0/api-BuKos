@@ -20,12 +20,14 @@ return new class extends Migration
             $table->string('nama_pemilik');
             $table->string('nama_kos');
             $table->string('lokasi_kos');
-            $table->integer('harga_kos');
-
-
-
-
-
+            $table->double('harga_kos');
+            $table->string('spesifikasi_kamar');
+            $table->string('fasilitas_kamar');
+            $table->string('fasilitas_umum');
+            $table->string('peraturan_kamar');
+            $table->string('peraturan_kos');
+            $table->string('tipe_kamar');
+            $table->boolean('favorite')->default(false)->nullable();
             $table->timestamps();
         });
     }

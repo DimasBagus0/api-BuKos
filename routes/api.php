@@ -38,9 +38,10 @@ Route::prefix('owner')->name('owner.')->group(function () {
   Route::get('/allproduct', [ProductController::class, 'product']);
   Route::get('/product/search', [ProductController::class, 'search']);
   Route::get('/getoneproduct/{id}', [ProductController::class, 'getproduct']);
-  Route::middleware('auth:sanctum')->put('/product/{product}/edit',[ProductController::class, 'edit']);
+  Route::middleware('auth:sanctum')->put('/product/{product}/edit',[ProductController::class, 'editAndUpdate']);
   Route::middleware('auth:sanctum')->delete('/product/{id}', [ProductController::class, 'destroy']);
   Route::middleware('auth:sanctum')->post('/product/{id}/favorite', [ProductController::class, 'favorite']);
+  Route::middleware('auth:sanctum')->get('/getfavorite', [ProductController::class, 'getFavorites']);
 
     //review
   Route::middleware(['auth:sanctum', 'role:user'])->post('addreview', [ReviewController::class, 'addreview']);

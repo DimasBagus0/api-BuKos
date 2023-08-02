@@ -70,7 +70,7 @@ class ProductController extends Controller
             'peraturan_kamar'=>['string',],
             'peraturan_kos'=>['string',],
             'tipe_kamar'=>['string',],
-            'favorite' => [],
+            // 'favorite' => [],
         ]);
 
         if($validator->fails()){
@@ -195,17 +195,11 @@ class ProductController extends Controller
     ], Response::HTTP_OK);
 }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(product $product)
-    {
-        $user = Auth::user();
-    if ($user->role !== 'owner') { // Pemeriksaan apakah peran pengguna adalah "owner"
+public function editAndUpdate(Request $request, $id)
+{
+    // Pastikan hanya pemilik yang bisa mengedit produk
+    $user = Auth::user();
+    if ($user->role !== 'owner') {
         return response()->json([
             'success' => false,
             'message' => 'Anda tidak memiliki izin untuk melakukan tindakan ini.',
@@ -214,33 +208,38 @@ class ProductController extends Controller
         ], Response::HTTP_UNAUTHORIZED);
     }
 
-        try {
-            return response()->json([
-                'success' => true,
-                'message' => 'Berhasil Mengedit Product',
-                'data' => $product
-            ], Response::HTTP_OK);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Server sedang error',
-                'error' => $th->getMessage(),
-                'data' => null,
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+    // Temukan data produk berdasarkan ID
+    $product = Product::find($id);
+
+    // Periksa apakah produk ditemukan
+    if (!$product) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Produk tidak ditemukan.',
+            'product' => null,
+        ], Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
+    if ($request->isMethod('get')) {
+        // Jika method adalah GET, kembalikan data produk untuk diedit
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil mendapatkan data produk untuk diedit',
+            'data' => $product,
+        ], Response::HTTP_OK);
+    } elseif ($request->isMethod('put')) {
+        // Jika method adalah PUT, lakukan validasi dan simpan perubahan data produk
         $validator = Validator::make($request->all(), [
+            'nama_kos' => ['string', 'max:50'],
+            'harga_kos' => ['numeric'],
+            'spesifikasi_kamar' => ['string'],
+            'fasilitas_kamar' => ['string'],
+            'fasilitas_umum' => ['string'],
+            'peraturan_kamar' => ['string'],
+            'peraturan_kos' => ['string'],
+            'tipe_kamar' => ['string'],
+            'foto_kos' => ['image', 'mimes:jpeg,png,svg,jpg,gif,jfif', 'max:3000'],
+            'foto_pemilik' => ['image', 'mimes:jpeg,png,svg,jpg,gif,jfif', 'max:3000'],
         ]);
 
         if ($validator->fails()) {
@@ -252,25 +251,32 @@ class ProductController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        // Pastikan hanya pemilik yang bisa mengedit produk
-        $user = Auth::user();
-    if ($user->role !== 'owner') { // Pemeriksaan apakah peran pengguna adalah "owner"
-        return response()->json([
-            'success' => false,
-            'message' => 'Anda tidak memiliki izin untuk melakukan tindakan ini.',
-            'error' => 'Unauthorized',
-            'product' => null,
-        ], Response::HTTP_UNAUTHORIZED);
-    }
-
         try {
-            // Memperbarui data produk berdasarkan permintaan
-            $product->update($request->all());
+            // Update fields other than images
+            $product->update($request->except(['foto_kos', 'foto_pemilik']));
+
+            // Update images if provided
+            if ($request->hasFile('foto_kos')) {
+                $file_fotokos = $request->file('foto_kos');
+                $name_fotokos = $file_fotokos->getClientOriginalName();
+                $product->foto_kos = $file_fotokos->storeAs('fotokos', $name_fotokos);
+                $product->save();
+            }
+
+            if ($request->hasFile('foto_pemilik')) {
+                $file_request = $request->file('foto_pemilik');
+                $file_name = $file_request->getClientOriginalName();
+                $product->foto_pemilik = $file_request->storeAs('person', $file_name);
+                $product->save();
+            }
+
+            // Ambil data terbaru setelah di-update
+            $updatedProduct = Product::find($id);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Data Berhasil Diperbarui',
-                'product' => $product,
+                'product' => $updatedProduct,
             ], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return response()->json([
@@ -280,9 +286,37 @@ class ProductController extends Controller
                 'product' => null,
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    } else {
+        // Jika method selain GET atau PUT, tampilkan pesan error
+        return response()->json([
+            'success' => false,
+            'message' => 'Metode tidak diizinkan.',
+            'product' => null,
+        ], Response::HTTP_METHOD_NOT_ALLOWED);
     }
+}
 
-    // Pada function favorite:
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\product  $product
+     * @return \Illuminate\Http\Response
+     */
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\product  $product
+     * @return \Illuminate\Http\Response
+     */
+
+
+
+// Pada function favorite:
 public function favorite($id)
 {
     $user = Auth::user();
@@ -312,22 +346,25 @@ public function favorite($id)
 
     // Lakukan tindakan berdasarkan status favorit
     if ($isFavorited) {
-        // Remove from favorites
+        // Hapus produk dari daftar favorit
         $user->favorites()->detach($product->id);
+        // Perbarui status favorit pada model Product
+        $product->update(['favorite' => false]); // Ubah nilai favorite menjadi false (0)
+        $message = 'Produk dihapus dari favorit.';
     } else {
-        // Add to favorites
+        // Tambahkan produk ke daftar favorit
         $user->favorites()->attach($product->id);
+        // Perbarui status favorit pada model Product
+        $product->update(['favorite' => true]); // Ubah nilai favorite menjadi true (1)
+        $message = 'Produk ditambahkan ke favorit.';
     }
-
-    // Update status favorit pada model Product
-    $product->update(['favorited' => !$isFavorited]);
-
     return response()->json([
         'success' => true,
-        'message' => $isFavorited ? 'Produk dihapus dari favorit.' : 'Produk ditambahkan ke favorit.',
+        'message' => $message,
         'product' => $product,
     ], Response::HTTP_OK);
 }
+
 
 public function getFavorites()
 {

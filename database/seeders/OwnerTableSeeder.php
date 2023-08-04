@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
-class UserSeeder extends Seeder
+class OwnerTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,20 +18,19 @@ class UserSeeder extends Seeder
         public function run()
         {
             User::create([
-                'name' => 'dimaz',
-                'email' => 'dimazbaguz@gmail.com',
-                'phone' => '0895426174001',
-                'password' => bcrypt('mangeak'),
-                'role' => 'user',
+                'name' => 'Dimas',
+                'email' => 'dimas@gmail.com',
+                'phone' => '08954212819',
+                'password' => bcrypt('bangudahbang'),
+                'role' => 'owner',
             ]);
 
             User::create([
                 'name' => 'Antariksa',
-                'email' => ' andariksa@gmail.com',
-                'phone' => '087820025878',
-                'password' => bcrypt('andarikza'),
-                'role' => 'user',
+                'email' => 'antariksa@example.com',
+                'phone' => '08121293911',
+                'password' => bcrypt('bangudahbang'),
+                'role' => 'owner',
             ]);
         }
-
 }

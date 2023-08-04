@@ -70,6 +70,7 @@ class ProductController extends Controller
             'peraturan_kamar'=>['string',],
             'peraturan_kos'=>['string',],
             'tipe_kamar'=>['string',],
+            'alamat_kos'=>['string']
             // 'favorite' => [],
         ]);
 
@@ -115,7 +116,8 @@ class ProductController extends Controller
                 'fasilitas_umum'=> $request->fasilitas_umum,
                 'peraturan_kamar'=> $request->peraturan_kamar,
                 'peraturan_kos'=> $request->peraturan_kos,
-                'tipe_kamar'=> $request->tipe_kamar
+                'tipe_kamar'=> $request->tipe_kamar,
+                'alamat_kos' => $request->alamat_kos,
             ]);
 
             $data2 = Product::where('id', $product->id)->first();
@@ -140,7 +142,8 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $searchQuery = $request->input('Search');
-        $filterByType = $request->input('Filter');
+        $filterByType = $request->input('Filter_kos');
+        $filterByAlamatKos = $request->input('Filter_desa');
 
         $query = Product::query();
 
@@ -150,6 +153,10 @@ class ProductController extends Controller
 
         if ($filterByType) {
             $query->where('tipe_kamar', $filterByType);
+        }
+
+        if ($filterByAlamatKos) {
+            $query->where('alamat_kos', $filterByAlamatKos);
         }
 
         $product = $query->get();
@@ -238,6 +245,7 @@ public function editAndUpdate(Request $request, $id)
             'peraturan_kamar' => ['string'],
             'peraturan_kos' => ['string'],
             'tipe_kamar' => ['string'],
+            'alamat_kos'=> ['string'],
             'foto_kos' => ['image', 'mimes:jpeg,png,svg,jpg,gif,jfif', 'max:3000'],
             'foto_pemilik' => ['image', 'mimes:jpeg,png,svg,jpg,gif,jfif', 'max:3000'],
         ]);

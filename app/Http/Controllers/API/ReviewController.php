@@ -23,7 +23,7 @@ class ReviewController extends Controller
         $review = Review::all();
         return response()->json([
             'succes' => true,
-            'message' => 'List data Product',
+            'message' => 'List data Review',
             'error' => null,
             'reviews' => $review
         ], Response::HTTP_OK);
@@ -162,9 +162,44 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
-    {
-        //
+    public function destroy($id)
+{  $review = Review::find($id);
+
+    if (!$review) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Review Tidak Di Temukan',
+            'review' => null,
+        ], Response::HTTP_NOT_FOUND);
     }
+
+    $user = Auth::user();
+    if ($user->role !== 'user') {
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda tidak memiliki izin untuk melakukan tindakan ini.',
+            'error' => 'Unauthorized',
+            'review' => null,
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    try {
+        // Hapus produk dari database
+        $review->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Review Berhasil Di Hapus',
+
+        ], Response::HTTP_OK);
+    } catch (\Throwable $th) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Server Sedang Error',
+            'error' => $th->getMessage(),
+            'review' => null,
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+}
 }
 

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('peraturan_kamar');
             $table->string('peraturan_kos');
             $table->string('tipe_kamar');
+            $table->string('alamat_kos');
             $table->boolean('favorite')->default(false)->nullable();
             $table->timestamps();
         });

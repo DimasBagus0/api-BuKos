@@ -46,6 +46,7 @@ Route::prefix('owner')->name('owner.')->group(function () {
     //review
   Route::middleware(['auth:sanctum', 'role:user'])->post('addreview', [ReviewController::class, 'addreview']);
   Route::get('review', [ReviewController::class, 'review']);
+  Route::middleware('auth:sanctum')->delete('/review/{id}', [ReviewController::class, 'destroy']);
 
 
 // Route::get('search/{nama_kos}', [ProductController::class, 'search']);

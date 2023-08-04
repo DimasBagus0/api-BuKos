@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
             'foto_kos' => 'fotokos/kos_1.jpeg',
             'foto_pemilik' => 'person/dimas1.png',
             'nama_pemilik' => 'Budi Santoso',
-            'nama_kos'=> 'Kos Bahagia',
+            'nama_kos'=> 'Kos Jawir',
             'lokasi_kos'=>'Jalan Pemuda No. 123, Kudus',
             'harga_kos'=> 1500000.00,
             'spesifikasi_kamar'=> 'Ukuran kamar: 3m x 4m, Tipe tempat tidur: Single bed, AC: Ya, Kamar mandi: Dalam',
@@ -27,7 +27,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Dapur bersama, Ruang tamu bersama, Area parkir',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Bacin'
 
         ]);
         Product::create([
@@ -42,7 +43,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Ruang makan bersama, Laundry self-service, Taman',
             'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
-            'tipe_kamar'=> 'Campuran'
+            'tipe_kamar'=> 'Campuran',
+            'alamat_kos'=>'Bacin'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_3.jpg',
@@ -56,7 +58,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Dapur bersama, Ruang tamu bersama, Area parkir',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
-            'tipe_kamar'=> 'Putri'
+            'tipe_kamar'=> 'Putri',
+            'alamat_kos'=>'Besito'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_4.jpg',
@@ -70,7 +73,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> ' Ruang makan bersama, Area cuci dan jemur, Taman',
             'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
-            'tipe_kamar'=> 'Putri'
+            'tipe_kamar'=> 'Putri',
+            'alamat_kos'=>'Besito'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_5.jpg',
@@ -84,7 +88,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Dapur bersama, Ruang tamu bersama, Area parkir',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
-            'tipe_kamar'=> 'Campuran'
+            'tipe_kamar'=> 'Campuran',
+            'alamat_kos'=>'Demaan'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_6.jpeg',
@@ -98,7 +103,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Ruang makan bersama, Laundry self-service, Taman',
             'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Demaan'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_7.jpg',
@@ -112,7 +118,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Dapur bersama, Ruang tamu bersama, Area parkir',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Jepang'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_8.jpg',
@@ -126,7 +133,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> ' Ruang makan bersama, Area cuci dan jemur, Taman',
             'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Jepang'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_9.jpeg',
@@ -140,7 +148,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Dapur bersama, Ruang tamu bersama, Area parkir',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
-            'tipe_kamar'=> 'Campuran'
+            'tipe_kamar'=> 'Campuran',
+            'alamat_kos'=>'Getas'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_10.jpg',
@@ -154,7 +163,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Ruang makan bersama, Laundry self-service, Taman',
             'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Getas'
 
         ]);
         Product::create([
@@ -169,7 +179,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Ruang makan bersama, Area parkir, Tempat jemur',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Ngembal'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_12.jpg',
@@ -183,7 +194,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Area parkir, Area olahraga, Ruang tamu bersama',
             'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Ngembal'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_13.jpg',
@@ -197,7 +209,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Lemari pakaian, Meja dan kursi, AC, TV',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
-            'tipe_kamar'=> 'Putri'
+            'tipe_kamar'=> 'Putri',
+            'alamat_kos'=>'Nganguk'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_14.png',
@@ -211,7 +224,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Ruang makan bersama, Area olahraga, Ruang tamu bersama',
             'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Nganguk'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_15.jpg',
@@ -225,7 +239,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Dapur bersama, Ruang tamu bersama, Area parkir',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
-            'tipe_kamar'=> 'Putra'
+            'tipe_kamar'=> 'Putra',
+            'alamat_kos'=>'Purwosari'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_16.jpg',
@@ -239,7 +254,8 @@ class ProductSeeder extends Seeder
             'fasilitas_umum'=> 'Area parkir, Tempat jemur, Ruang tamu bersama',
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
-            'tipe_kamar'=> 'Putri'
+            'tipe_kamar'=> 'Putri',
+            'alamat_kos'=>'Purwosari'
         ]);
         $products = Product::all();
 

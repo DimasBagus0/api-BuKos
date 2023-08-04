@@ -24,6 +24,7 @@ class product extends Model
         'peraturan_kamar',
         'peraturan_kos',
         'tipe_kamar',
+        'alamat_kos',
         'favorite'
 
     ];

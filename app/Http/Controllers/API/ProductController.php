@@ -139,6 +139,32 @@ class ProductController extends Controller
 
     }
 
+    public function productowner(){
+        $user = Auth::user();
+        if ($user->role !== 'owner') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Anda tidak memiliki izin untuk melihat produk.',
+                'error' => 'Unauthorized',
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        // Mendapatkan daftar produk berdasarkan ID pemilik (owner)
+        $product = Product::where('user_id', $user->id)->get();
+        if ($product->isEmpty()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tidak ada produk yang ditemukan untuk pengguna ini.',
+                'product' => null,
+            ], Response::HTTP_OK);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Produk Berhasil Diambil',
+            'product' => $product,
+        ], Response::HTTP_OK);
+    }
+
     public function search(Request $request)
     {
         $searchQuery = $request->input('Search');

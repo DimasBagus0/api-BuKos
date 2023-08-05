@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\product;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductSeeder extends Seeder
 {
@@ -15,6 +17,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        Auth::loginUsingId(1);
         Product::create([
             'foto_kos' => 'fotokos/kos_1.jpeg',
             'foto_pemilik' => 'person/dimas1.png',
@@ -29,7 +32,6 @@ class ProductSeeder extends Seeder
             'peraturan_kos'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'tipe_kamar'=> 'Putra',
             'alamat_kos'=>'Bacin'
-
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_2.png',

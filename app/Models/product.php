@@ -33,4 +33,16 @@ class product extends Model
         return $this->belongsToMany(User::class, 'user_favorites', 'product_id', 'user_id')
             ->withTimestamps();
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Event "creating" akan dijalankan sebelum produk disimpan ke database
+        static::creating(function ($product) {
+            $user = auth()->user(); // Dapatkan pengguna terotentikasi saat ini
+            if ($user) {
+                $product->user_id = $user->id; // Tetapkan nilai user_id dengan ID pengguna terotentikasi
+            }
+        });
+    }
 }

@@ -42,7 +42,7 @@ Route::prefix('owner')->name('owner.')->group(function () {
   Route::middleware('auth:sanctum')->delete('/product/{id}', [ProductController::class, 'destroy']);
   Route::middleware('auth:sanctum')->post('/product/{id}/favorite', [ProductController::class, 'favorite']);
   Route::middleware('auth:sanctum')->get('/getfavorite', [ProductController::class, 'getFavorites']);
-
+  Route::middleware('auth:sanctum')->get('/productowner', [ProductController::class, 'productowner']);
     //review
   Route::middleware(['auth:sanctum', 'role:user'])->post('addreview', [ReviewController::class, 'addreview']);
   Route::get('review', [ReviewController::class, 'review']);

@@ -48,6 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Product::class, 'user_favorites');
     }
 
+    public function product()
+{
+    return $this->hasMany(Product::class);
+}
 
     /**
      * The attributes that should be cast.

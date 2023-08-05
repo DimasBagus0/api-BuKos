@@ -27,7 +27,7 @@ class OwnerTableSeeder extends Seeder
 
             User::create([
                 'name' => 'Antariksa',
-                'email' => 'antariksa@example.com',
+                'email' => 'antariksa@gmail.com',
                 'phone' => '08121293911',
                 'password' => bcrypt('bangudahbang'),
                 'role' => 'owner',

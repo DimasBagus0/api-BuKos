@@ -70,7 +70,7 @@ class ProductController extends Controller
             'peraturan_kamar'=>['string',],
             'peraturan_kos'=>['string',],
             'tipe_kamar'=>['string',],
-            'alamat_kos'=>['string']
+            'alamat_kos'=>['required','string']
             // 'favorite' => [],
         ]);
 
@@ -169,7 +169,7 @@ class ProductController extends Controller
     {
         $searchQuery = $request->input('Search');
         $filterByType = $request->input('Filter_kos');
-        $filterByAlamatKos = $request->input('Filter_desa');
+        $filterByLokasiKos = $request->input('Filter_desa');
 
         $query = Product::query();
 
@@ -181,8 +181,8 @@ class ProductController extends Controller
             $query->where('tipe_kamar', $filterByType);
         }
 
-        if ($filterByAlamatKos) {
-            $query->where('alamat_kos', $filterByAlamatKos);
+        if ($filterByLokasiKos) {
+            $query->where('lokasi_kos', $filterByLokasiKos);
         }
 
         $product = $query->get();

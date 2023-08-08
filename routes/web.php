@@ -15,6 +15,6 @@ use App\Http\Controllers\OrderController;
 */
 
 Route::get('/', function () {return view('welcome');});
-Route::get('/payment', [OrderController::class, 'index']);
+Route::get('/payment/{id}', [OrderController::class, 'index']);
 Route::post('/checkout', [OrderController::class, 'checkout']);
 Route::get('/invoice/{id}', [OrderController::class, 'invoice']);

@@ -28,6 +28,12 @@ class product extends Model
         'favorite'
 
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_favorites', 'product_id', 'user_id')

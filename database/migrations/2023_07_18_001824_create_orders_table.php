@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('address');
+            $table->text('tipe_kamar');
             $table->string('phone');
             $table->integer('qty');
             $table->bigInteger('total_price');
+            $table->double('harga_kos');
             $table->enum('status', ['Unpaid', 'Paid']);
             $table->timestamps();
         });

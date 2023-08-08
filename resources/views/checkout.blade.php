@@ -28,13 +28,12 @@
                 </tr>
 
                 <tr>
-                    <td>Nomor Handphone</td>
+                    <td style="width: 100%">Nomor Handphone</td>
                     <td> : {{$order->phone}}</td>
                 </tr>
-
                 <tr>
-                    <td>Alamat</td>
-                    <td> : {{$order->address}}</td>
+                    <td>Tipe Kamar</td>
+                    <td> : {{$order->tipe_kamar}}</td>
                 </tr>
 
                 <tr>

@@ -28,8 +28,8 @@
                 </tr>
 
                 <tr>
-                    <td>Alamat</td>
-                    <td> : {{$order->address}}</td>
+                    <td>Tipe Kamar</td>
+                    <td> : {{$order->tipe_kamar}}</td>
                 </tr>
 
                 <tr>

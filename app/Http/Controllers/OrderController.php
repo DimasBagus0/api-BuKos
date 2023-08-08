@@ -73,14 +73,18 @@ class OrderController extends Controller
     //     }
     // }
 
-    public function index()
+    public function index($id)
     {
-        return view('home');
+        $product = product::where('id', $id)->first();
+
+        return view('home',[
+            'product' => $product
+        ]);
     }
 
     public function checkout(Request $request)
     {
-        $request->request->add(['total_price' => $request->qty * 1000000, 'status' => 'Unpaid']);
+        $request->request->add(['total_price' => $request->qty * $request->harga_kos, 'status' => 'Unpaid']);
         $order = Order::create($request->all());
 
         Config::$serverKey = config('midtrans.server_key');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Midtrans\Snap;
-use App\Models\Product;
+use App\Models\product;
 use Midtrans\Config;
 use App\Models\Order;
 use Illuminate\Http\Request;

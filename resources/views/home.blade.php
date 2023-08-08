@@ -12,16 +12,21 @@
     <div class="container">
         <h1>Bukos Payment</h1>
         <div class="card" style="width: 18rem;">
-            <img src="{{ asset('fotokos/kos_1.jpeg') }}" class="card-img-top" alt="...">
+            <img src="{{ asset($product->foto_kos) }}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{$product->nama_kos}}</h5>
               <p class="card-text">{{$product->alamat_kos}}</p>
               {{-- <p class="card-text">Rp. {{$product->harga_kos}}</p> --}}
               <form action="/checkout" method="POST">
                 @csrf
+                <div hidden class="mb-3">
+                    <label for="foto_kos" class="form-label"></label>
+                    <input type="text" name="foto_kos" value="{{old('foto_kos', $product->foto_kos)}}" class="form-control" id="name"
+                    placeholder="Masukkan Nama!" >
+                </div>
                 <div class="mb-3">
                         <label for="qty" class="form-label">Mau Booking berapa bulan?</label>
-                        <input type="number" name="qty" class="form-control" id="qty"
+                        <input type="number" required name="qty" class="form-control" id="qty"
                         placeholder="Jumlah bulan">
                 </div>
                 <div class="mb-3">

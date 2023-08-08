@@ -12,7 +12,7 @@
     <div class="container">
         <h1>Invoice</h1>
         <div class="card" style="width: 18rem;">
-            {{-- <img src="{{asset('assets/image/20230507_121929.jpg')}}" class="card-img-top" alt="..."> --}}
+            <img src="{{ asset($order->foto_kos) }}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Detail Pesanan</h5>
               <table>
@@ -38,7 +38,12 @@
                 </tr>
 
                 <tr>
-                    <td>Total Harga</td>
+                    <td>Total Bayar</td>
+                    <td> : {{$order->total_price}}</td>
+                </tr>
+
+                <tr>
+                    <td>Status Pembayaran</td>
                     <td> : {{$order->status}}</td>
                 </tr>
               </table>

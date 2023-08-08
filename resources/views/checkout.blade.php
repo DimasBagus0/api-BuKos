@@ -17,7 +17,7 @@
     <div class="container">
         <h1>Bukos Payment</h1>
         <div class="card" style="width: 18rem;">
-            <img src="{{ asset('fotokos/kos_1.jpeg') }}" class="card-img-top" alt="...">
+            <img src="{{ asset($order->foto_kos) }}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Detail Pesanan</h5>
               <table>
@@ -44,6 +44,11 @@
                 <tr>
                     <td>Total Bayar</td>
                     <td> : {{$order->total_price}}</td>
+                </tr>
+
+                <tr>
+                    <td>Status Pembayaran</td>
+                    <td> : {{$order->status}}</td>
                 </tr>
               </table>
               <button class="btn btn-primary mt-3"id="pay-button">Bayar Sekarang</button>

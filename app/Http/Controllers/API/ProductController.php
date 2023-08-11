@@ -166,41 +166,42 @@ class ProductController extends Controller
     }
 
     public function search(Request $request)
-    {
-        $searchQuery = $request->input('Search');
-        $filterByType = $request->input('Filter_kos');
-        $filterByLokasiKos = $request->input('Filter_desa');
+{
+    $searchQuery = $request->input('search_product');
+    $filterByType = $request->input('Filter_kos');
+    $searchDesa = $request->input('search_desa');
 
-        $query = Product::query();
+    $query = Product::query();
 
-        if ($searchQuery) {
-            $query->where('nama_kos', 'like', '%' . $searchQuery . '%');
-        }
+    if ($searchQuery) {
+        $query->where('nama_kos', 'like', '%' . $searchQuery . '%');
+    }
 
-        if ($filterByType) {
-            $query->where('tipe_kamar', $filterByType);
-        }
+    if ($filterByType) {
+        $query->where('tipe_kamar', $filterByType);
+    }
 
-        if ($filterByLokasiKos) {
-            $query->where('lokasi_kos', $filterByLokasiKos);
-        }
+    if ($searchDesa) {
+        $query->where('lokasi_kos', 'like', '%' . $searchDesa . '%');
+    }
 
-        $product = $query->get();
+    $product = $query->get();
 
-        if ($product->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Kos Tidak Di Temukan',
-                'data' => null,
-            ]);
-        }
-
+    if ($product->isEmpty()) {
         return response()->json([
-            'success' => true,
-            'message' => 'Hasil pencarian',
-            'data' => $product
+            'success' => false,
+            'message' => 'Kos Tidak Di Temukan',
+            'data' => null,
         ]);
     }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Hasil pencarian',
+        'data' => $product
+    ]);
+}
+
 
 
     /**

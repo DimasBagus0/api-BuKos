@@ -194,6 +194,7 @@ class OrderController extends Controller
             if ($request->transaction_status == 'capture' or $request->transaction_status == 'settlement' ) {
                 $order = Order::find($request->order_id);
                 $order->update(['status' => 'paid']);
+                return redirect()->away('https://bukos.my.id/finish');
             }
         }
     }

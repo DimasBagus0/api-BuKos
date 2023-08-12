@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Midtrans\Snap;
 use App\Models\product;
 use Midtrans\Config;
-use App\Models\Order;
+use App\Models\order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

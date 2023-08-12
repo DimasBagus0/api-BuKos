@@ -8,5 +8,8 @@
 </head>
 <body>
     <h1>Finish</h1>
+    <a href="http://localhost:3000/profile/riwayatbooking">
+        <button>test</button>
+    </a>
 </body>
 </html>

@@ -32,5 +32,13 @@ class OwnerTableSeeder extends Seeder
                 'password' => bcrypt('bangudahbang'),
                 'role' => 'owner',
             ]);
+
+            User::create([
+                'name' => 'Rasyid',
+                'email' => 'rasyid@gmail.com',
+                'phone' => '082893128930',
+                'password' => bcrypt('rasyid1'),
+                'role' => 'owner',
+            ]);
         }
 }

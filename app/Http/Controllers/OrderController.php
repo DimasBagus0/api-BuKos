@@ -198,6 +198,19 @@ class OrderController extends Controller
             }
         }
     }
+    public function userTransactions()
+{
+    $user = Auth::user();
+
+    $transactions = Order::where('user_id', $user->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'transactions' => $transactions,
+    ], 200);
+}
     public function invoice($id){
         $order = Order::find($id);
         return view('invoice', compact('order'));

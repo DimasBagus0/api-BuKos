@@ -38,6 +38,7 @@ Route::prefix('owner')->name('owner.')->group(function () {
   Route::get('/allproduct', [ProductController::class, 'product']);
   Route::get('/product/search', [ProductController::class, 'search']);
   Route::get('/getoneproduct/{id}', [ProductController::class, 'getproduct']);
+  route::get('/product-terbaru', [ProductController::class, 'ProductTerbaru']);
   Route::middleware('auth:sanctum')->put('/product/{product}/edit',[ProductController::class, 'editAndUpdate']);
   Route::middleware('auth:sanctum')->delete('/product/{id}', [ProductController::class, 'destroy']);
   Route::middleware('auth:sanctum')->post('/product/{id}/favorite', [ProductController::class, 'favorite']);

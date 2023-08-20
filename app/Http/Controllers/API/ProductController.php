@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use App\Models\product;
+use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -165,6 +165,17 @@ class ProductController extends Controller
         ], Response::HTTP_OK);
     }
 
+    public function ProductTerbaru()
+{
+    $ProductTerbaru = Product::latest()->take(6)->get();
+    return response()->json([
+        'success' => true,
+        'message' => 'Data Produk Terbaru Berhasil Diambil',
+        'ProductTerbaru' => $ProductTerbaru,
+    ], Response::HTTP_OK);
+}
+
+
     public function search(Request $request)
 {
     $searchQuery = $request->input('search_product');
@@ -255,7 +266,6 @@ public function editAndUpdate(Request $request, $id)
     }
 
     if ($request->isMethod('get')) {
-        // Jika method adalah GET, kembalikan data produk untuk diedit
         return response()->json([
             'success' => true,
             'message' => 'Berhasil mendapatkan data produk untuk diedit',

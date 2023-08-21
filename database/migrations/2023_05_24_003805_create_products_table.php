@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('tipe_kamar');
             $table->string('alamat_kos');
             $table->boolean('favorite')->default(false)->nullable();
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

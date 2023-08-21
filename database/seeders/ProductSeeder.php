@@ -31,7 +31,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Bacin'
+            'lokasi_kos'=>'Bacin',
+            'latitude'=>'-6.789075',
+            'longitude'=>'110.850234'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_2.png',
@@ -46,7 +48,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
             'tipe_kamar'=> 'Campuran',
-            'lokasi_kos'=>'Bacin'
+            'lokasi_kos'=>'Bacin',
+            'latitude'=>'-6.787682',
+            'longitude'=>'110.848527'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_3.jpg',
@@ -61,7 +65,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putri',
-            'lokasi_kos'=>'Besito'
+            'lokasi_kos'=>'Besito',
+            'latitude'=>'-6.7512822',
+            'longitude'=>'110.8430177'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_4.jpg',
@@ -76,7 +82,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
             'tipe_kamar'=> 'Putri',
-            'lokasi_kos'=>'Besito'
+            'lokasi_kos'=>'Besito',
+            'latitude'=>'-6.751123',
+            'longitude'=>'110.843848'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_5.jpg',
@@ -91,7 +99,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Campuran',
-            'lokasi_kos'=>'Demaan'
+            'lokasi_kos'=>'Demaan',
+            'latitude'=>'-6.8069664',
+            'longitude'=>'110.8404898'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_6.jpeg',
@@ -106,7 +116,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Demaan'
+            'lokasi_kos'=>'Demaan',
+            'latitude'=>'-6.8047881',
+            'longitude'=>'110.8390994'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_7.jpg',
@@ -121,7 +133,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Jepang'
+            'lokasi_kos'=>'Jepang',
+            'latitude'=>'-6.819738',
+            'longitude'=>'110.8574228'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_8.jpg',
@@ -136,7 +150,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Jepang'
+            'lokasi_kos'=>'Jepang',
+            'latitude'=>'-6.8204602',
+            'longitude'=>'110.8568973'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_9.jpeg',
@@ -151,7 +167,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Campuran',
-            'lokasi_kos'=>'Getas'
+            'lokasi_kos'=>'Getas',
+            'latitude'=>'-6.8153171',
+            'longitude'=>'110.8395933'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_10.jpg',
@@ -166,7 +184,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Getas'
+            'lokasi_kos'=>'Getas',
+            'latitude'=>'-6.8149288',
+            'longitude'=>'110.8432153'
 
         ]);
         Product::create([
@@ -182,7 +202,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Ngembal'
+            'lokasi_kos'=>'Ngembal',
+            'latitude'=>'-6.8068852',
+            'longitude'=>'110.8762083'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_12.jpg',
@@ -197,7 +219,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Ngembal'
+            'lokasi_kos'=>'Ngembal',
+            'latitude'=>'-6.8049509',
+            'longitude'=>'110.8765427'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_13.jpg',
@@ -212,7 +236,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putri',
-            'lokasi_kos'=>'Nganguk'
+            'lokasi_kos'=>'Nganguk',
+            'latitude'=>'-6.8066098',
+            'longitude'=>'110.8472706'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_14.png',
@@ -227,7 +253,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Nganguk'
+            'lokasi_kos'=>'Nganguk',
+            'latitude'=>'-6.8074549',
+            'longitude'=>'110.8470171'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_15.jpg',
@@ -242,7 +270,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putra',
-            'lokasi_kos'=>'Purwosari'
+            'lokasi_kos'=>'Purwosari',
+            'latitude'=>'-6.8104789',
+            'longitude'=>'110.8209854'
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_16.jpg',
@@ -257,7 +287,9 @@ class ProductSeeder extends Seeder
             'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putri',
-            'lokasi_kos'=>'Purwosari'
+            'lokasi_kos'=>'Purwosari',
+            'latitude'=>'-6.8095603',
+            'longitude'=>'110.8222951'
         ]);
         $products = Product::all();
 

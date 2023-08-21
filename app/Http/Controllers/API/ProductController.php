@@ -70,7 +70,9 @@ class ProductController extends Controller
             'peraturan_kamar'=>['string',],
             'peraturan_kos'=>['string',],
             'tipe_kamar'=>['string',],
-            'alamat_kos'=>['required','string']
+            'alamat_kos'=>['required','string'],
+            'latitude'=>['string',],
+            'longitude'=>['string',],
             // 'favorite' => [],
         ]);
 
@@ -118,6 +120,8 @@ class ProductController extends Controller
                 'peraturan_kos'=> $request->peraturan_kos,
                 'tipe_kamar'=> $request->tipe_kamar,
                 'alamat_kos' => $request->alamat_kos,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
             ]);
 
             $data2 = Product::where('id', $product->id)->first();

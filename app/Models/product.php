@@ -25,7 +25,9 @@ class Product extends Model
         'peraturan_kos',
         'tipe_kamar',
         'alamat_kos',
-        'favorite'
+        'favorite',
+        'latitude',
+        'longitude'
 
     ];
 

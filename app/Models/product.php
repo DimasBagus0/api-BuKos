@@ -26,6 +26,7 @@ class Product extends Model
         'tipe_kamar',
         'alamat_kos',
         'favorite',
+        'approved',
         'latitude',
         'longitude'
 
@@ -41,6 +42,12 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'user_favorites', 'product_id', 'user_id')
             ->withTimestamps();
     }
+    public function approvedProducts()
+    {
+        return $this->belongsToMany(Product::class, 'user_approved_products', 'user_id', 'product_id')
+            ->withTimestamps();
+    }
+
     protected static function boot()
     {
         parent::boot();

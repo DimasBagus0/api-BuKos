@@ -29,11 +29,11 @@ return new class extends Migration
             $table->string('peraturan_kos');
             $table->string('tipe_kamar');
             $table->string('alamat_kos');
-            $table->boolean('favorite')->default(false)->nullable();
+            $table->boolean('approved')->default(false)->nullable();
+            $table->boolean('favorite')->default(false);
             $table->string('latitude');
             $table->string('longitude');
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

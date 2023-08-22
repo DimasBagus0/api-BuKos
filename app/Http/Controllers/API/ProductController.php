@@ -480,6 +480,74 @@ public function getFavorites()
     }
 }
 
+public function approve($id)
+{
+    $user = Auth::user();
+    if ($user->role !== 'admin') {
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda tidak memiliki izin untuk melakukan tindakan ini.',
+            'error' => 'Unauthorized',
+            'product' => null,
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    $product = Product::find($id);
+
+    // Periksa apakah produk ditemukan
+    if (!$product) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Produk tidak ditemukan.',
+            'product' => null,
+        ], Response::HTTP_NOT_FOUND);
+    }
+
+    // Cek apakah produk sudah ada di daftar favorit pengguna
+    $isApproved = $user->approved()->where('product_id', $product->id)->exists();
+
+    // Lakukan tindakan berdasarkan status favorit
+    if ($isApproved) {
+        // Hapus produk dari daftar favorit
+        $user->approved()->detach($product->id);
+        $product->update(['approved' => !$isApproved]); // Ubah nilai approved sesuai dengan kebalikan nilai $isApproved
+        $message = 'Produk Tidak Di Approve.';
+    } else {
+        // Tambahkan produk ke daftar favorit
+        $user->approved()->attach($product->id);
+        $product->update(['approved' => !$isApproved]); // Ubah nilai approved sesuai dengan kebalikan nilai $isApproved
+        $message = 'Produk Di Approved.';
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => $message,
+        'product' => $product,
+    ], Response::HTTP_OK);
+}
+
+
+
+public function getapprove()
+{
+    $user = Auth::user();
+
+    if (!$user) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda harus login untuk melihat produk favorit.',
+            'approved' => null,
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    $approved = $user->approved()->get();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Daftar produk favorit.',
+        'Approved' => $approved,
+    ], Response::HTTP_OK);
+}
 }
 
     /**

@@ -19,7 +19,7 @@ class AuthController extends Controller
             'phone' => 'required|numeric|min:10|unique:users,phone|',
             'password' => 'required|min:8',
             'confirm_password' => 'required|same:password',
-            'role' => 'sometimes|in:user,owner',
+            'role' => 'sometimes|in:user,owner,admin',
         ],[
             'email.unique' => 'Email sudah digunakan.',
             'phone.unique' => 'Nomor telepon sudah digunakan.',
@@ -68,7 +68,8 @@ class AuthController extends Controller
             // Jika role "user" mencoba login ke halaman owner atau sebaliknya, tolak login
             if (
                 ($auth->role === 'user' && \Illuminate\Support\Facades\Route::currentRouteName() === 'owner.login') ||
-                ($auth->role === 'owner' && \Illuminate\Support\Facades\Route::currentRouteName() === 'user.login')
+                ($auth->role === 'owner' && \Illuminate\Support\Facades\Route::currentRouteName() === 'user.login') ||
+                ($auth->role === 'admin' && \Illuminate\Support\Facades\Route::currentRouteName() === 'user.login')
             ) {
                 return response()->json([
                     'success' => false,
@@ -103,6 +104,47 @@ class AuthController extends Controller
             ]);
         }
     }
+    public function loginAdmin(Request $request)
+{
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        $auth = Auth::user();
+
+        // Pastikan hanya admin yang dapat mengakses rute ini
+        if ($auth->role === 'admin') {
+            $success['token'] = $auth->createToken('auth_token')->plainTextToken;
+            $success['name'] = $auth->name;
+            $success['email'] = $auth->email;
+            $success['role'] = $auth->role;
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Login sukses sebagai admin',
+                'data' => $success
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Anda tidak memiliki izin untuk login sebagai admin.',
+                'data' => null
+            ], 403); // Kode status 403 menunjukkan akses ditolak
+        }
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'Cek email dan password lagi',
+            'data' => null
+        ]);
+    }
+}
+    public function logoutAdmin(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Logout admin berhasil'
+        ]);
+    }
+
 
     public function getOwnerDetail(Request $request)
 {

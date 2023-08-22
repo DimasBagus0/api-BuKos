@@ -61,7 +61,7 @@
         <p>Terima kasih! Pembayaran Anda telah berhasil.</p>
         <p>Silakan klik tombol di bawah untuk melihat riwayat booking Anda.</p>
         <div class="button-container">
-            <a href="http://localhost:3000/profile/riwayatbooking" class="button">Lihat Riwayat Booking</a>
+            <a href="http://localhost:3000/profile/riwayattransaksi" class="button">Lihat Riwayat Booking</a>
         </div>
     </div>
 </body>

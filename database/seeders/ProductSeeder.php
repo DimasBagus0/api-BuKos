@@ -293,11 +293,11 @@ class ProductSeeder extends Seeder
         ]);
         $products = Product::all();
 
-        foreach ($products as $product) {
-            $formattedPrice = number_format($product->harga_kos, 0, ',', '.');
+        // foreach ($products as $product) {
+        //     $formattedPrice = number_format($product->harga_kos, 0, ',', '.');
 
-            echo "Nama Kos: $product->nama_kos\n";
-            echo "Harga Kos: Rp $formattedPrice\n\n";
-        }
+        //     echo "Nama Kos: $product->nama_kos\n";
+        //     echo "Harga Kos: Rp $formattedPrice\n\n";
+        // }
     }
 }

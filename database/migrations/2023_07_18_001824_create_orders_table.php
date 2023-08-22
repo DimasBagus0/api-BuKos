@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('qty');
             $table->bigInteger('total_price');
             $table->double('harga_kos');
-            $table->enum('status', ['Unpaid', 'Paid']);
+            $table->enum('status', ['Belum Bayar', 'Sudah Bayar']);
             $table->timestamps();
         });
     }

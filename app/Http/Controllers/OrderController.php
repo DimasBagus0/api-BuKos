@@ -139,7 +139,7 @@ class OrderController extends Controller
 
     $order = Order::create([
         'total_price' => $totalPrice,
-        'status' => 'Unpaid',
+        'status' => 'Belum Bayar',
         'user_id' => $user->id, // Assuming you're using user authentication
         'product_id' => $request->product_id,
         'name' => $request->name,
@@ -193,7 +193,7 @@ class OrderController extends Controller
         if ($hashed == $request->signature_key) {
             if ($request->transaction_status == 'capture' or $request->transaction_status == 'settlement' ) {
                 $order = Order::find($request->order_id);
-                $order->update(['status' => 'paid']);
+                $order->update(['status' => 'Sudah Bayar']);
                 return redirect()->away('https://bukos.my.id/finish');
             }
         }

@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             OwnerTableSeeder::class,
             ReviewSeeder::class,
-            ProductSeeder::class
+            ProductSeeder::class,
+            AdminSeeder::class
         ]);
         // $this->call();
         // $this->call();

@@ -33,6 +33,10 @@ Route::prefix('owner')->name('owner.')->group(function () {
     Route::middleware('auth:sanctum')->get('/detail', [AuthController::class, 'getOwnerDetail'])->name('owner.detail');
 });
 
+
+Route::post('login-admin', [AuthController::class, 'loginAdmin']);
+Route::post('logout-admin', [AuthController::class, 'logoutAdmin'])->middleware(['auth:sanctum', 'role:admin']);
+
     //product
   Route::middleware(['auth:sanctum', 'role:owner'])->post('/addproduct', [ProductController::class, 'store']);
   Route::get('/allproduct', [ProductController::class, 'product']);

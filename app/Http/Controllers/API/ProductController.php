@@ -287,6 +287,8 @@ public function editAndUpdate(Request $request, $id)
             'peraturan_kos' => ['string'],
             'tipe_kamar' => ['string'],
             'alamat_kos'=> ['string'],
+            'latitude'=> ['string'],
+            'longitude'=> ['string'],
             'foto_kos' => ['image', 'mimes:jpeg,png,svg,jpg,gif,jfif', 'max:3000'],
             'foto_pemilik' => ['image', 'mimes:jpeg,png,svg,jpg,gif,jfif', 'max:3000'],
         ]);

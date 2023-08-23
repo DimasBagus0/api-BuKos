@@ -21,7 +21,7 @@ class Product extends Model
         'spesifikasi_kamar',
         'fasilitas_kamar',
         'fasilitas_umum',
-        'peraturan_kamar',
+        // 'peraturan_kamar',
         'peraturan_kos',
         'tipe_kamar',
         'alamat_kos',

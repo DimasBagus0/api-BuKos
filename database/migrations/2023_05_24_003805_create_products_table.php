@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('spesifikasi_kamar');
             $table->string('fasilitas_kamar');
             $table->string('fasilitas_umum');
-            $table->string('peraturan_kamar');
+            // $table->string('peraturan_kamar');
             $table->string('peraturan_kos');
             $table->string('tipe_kamar');
             $table->string('alamat_kos');

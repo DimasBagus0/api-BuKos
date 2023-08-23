@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,13 @@ Route::get('/finish', function () {return view('finish');
 Route::get('/payment/{id}', [OrderController::class, 'index']);
 Route::post('/checkout', [OrderController::class, 'checkout']);
 Route::get('/invoice/{id}', [OrderController::class, 'invoice']);
+
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/users', [AdminController::class, 'allUsers'])->name('users');
+    Route::get('/products', [AdminController::class, 'allProducts'])->name('products');
+    Route::get('/pending', [AdminController::class, 'pendingProducts'])->name('pending');
+});
+

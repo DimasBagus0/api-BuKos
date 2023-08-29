@@ -37,9 +37,7 @@ Route::prefix('owner')->name('owner.')->group(function () {
     Route::post('/logoutadmin', [AuthController::class, 'logoutAdmin'])->middleware(['auth:sanctum', 'role:admin']);
     Route::middleware(['auth:sanctum', 'role:admin'])->put('/products/{id}/approve', [ProductController::class, 'approve'])->name('products.approve');
     Route::middleware(['auth:sanctum', 'role:admin'])->get('/products/approved', [ProductController::class, 'getApproved'])->name('products.approved');
-
-
-
+    Route::middleware(['auth:sanctum', 'role:admin'])->get('/getloginuser', [AuthController::class, 'getLoggedInUsers']);
 
 
     //product

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Product;
+
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Support\Facades\Auth;
 
@@ -176,7 +178,29 @@ class AuthController extends Controller
     ]);
 }
 
+public function getLoggedInUsers()
+    {
+        // Ambil semua pengguna yang login saat ini
+        $loggedInUsers = User::whereNotNull('last_login_at')->get();
 
+        return response()->json(['loggedInUsers' => $loggedInUsers]);
+    }
+
+    public function getApprovedProducts()
+    {
+        // Ambil semua produk yang telah diapprove (approved = true)
+        $approvedProducts = Product::where('approved', true)->get();
+
+        return response()->json(['approvedProducts' => $approvedProducts]);
+    }
+
+    public function getUnapprovedProducts()
+    {
+        // Ambil semua produk yang belum diapprove (approved = false)
+        $unapprovedProducts = Product::where('approved', false)->get();
+
+        return response()->json(['unapprovedProducts' => $unapprovedProducts]);
+    }
 
 
     public function logoutUser(Request $request)

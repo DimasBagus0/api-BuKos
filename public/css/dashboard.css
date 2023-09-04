@@ -1,0 +1,77 @@
+/* dashboard.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-content {
+    padding: 100px;
+    display: flex;
+    background-color: #1f1e2e;
+    height: 100vh;
+    /* flex-direction: column; */
+}
+
+.sidebar {
+    /* width: 250px;     */
+    /* height: 100%; */
+    /* background-color: #24252A; */
+    color: #fff;
+    background: rgba(131, 75, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    /* position: fixed; */
+    overflow-y: auto;
+}
+
+.sidebar h1 {
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 20px;
+    transition: .3s ease-in-out;
+}
+
+.sidebar ul li a:hover {
+    text-shadow: 0 0 5px #fff;
+}
+
+.content {
+    /* margin-left: 250px; */
+    padding: 0 20px 20px 20px;
+    width: 100%;
+}
+
+.table-container {
+    /* background-color: #262930; */
+    background: rgba(38, 41, 48, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(38, 41, 48, 0.4);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.table-container h2 {
+    color: white;
+    font-weight: 300;
+}
+

@@ -51,6 +51,7 @@ Route::prefix('owner')->name('owner.')->group(function () {
   Route::middleware('auth:sanctum')->post('/product/{id}/favorite', [ProductController::class, 'favorite']);
   Route::middleware('auth:sanctum')->get('/getfavorite', [ProductController::class, 'getFavorites']);
   Route::middleware('auth:sanctum')->get('/productowner', [ProductController::class, 'productowner']);
+  Route::middleware(['auth:sanctum'])->get('/orders/owners', [OrderController::class, 'getOrderOwners']);
     //review
   Route::middleware(['auth:sanctum', 'role:user'])->post('addreview', [ReviewController::class, 'addreview']);
   Route::get('review', [ReviewController::class, 'review']);

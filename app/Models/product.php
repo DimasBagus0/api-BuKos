@@ -16,6 +16,7 @@ class Product extends Model
         'foto_pemilik',
         'nama_pemilik',
         'nama_kos',
+        'kecamatan',
         'lokasi_kos',
         'harga_kos',
         'spesifikasi_kamar',

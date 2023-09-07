@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('foto_pemilik');
             $table->string('nama_pemilik');
             $table->string('nama_kos');
+            $table->string('kecamatan');
             $table->string('lokasi_kos');
             $table->double('harga_kos');
             $table->string('spesifikasi_kamar');

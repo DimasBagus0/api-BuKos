@@ -31,6 +31,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Bae',
             'lokasi_kos'=>'Bacin',
             'latitude'=>'-6.789075',
             'longitude'=>'110.850234'
@@ -48,6 +49,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
             'tipe_kamar'=> 'Campuran',
+            'kecamatan' => 'Bae',
             'lokasi_kos'=>'Bacin',
             'latitude'=>'-6.787682',
             'longitude'=>'110.848527'
@@ -65,6 +67,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putri',
+            'kecamatan' => 'Gebog',
             'lokasi_kos'=>'Besito',
             'latitude'=>'-6.7512822',
             'longitude'=>'110.8430177'
@@ -82,6 +85,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
             'tipe_kamar'=> 'Putri',
+            'kecamatan' => 'Gebog',
             'lokasi_kos'=>'Besito',
             'latitude'=>'-6.751123',
             'longitude'=>'110.843848'
@@ -99,6 +103,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Campuran',
+            'kecamatan' => 'Kota Kudus',
             'lokasi_kos'=>'Demaan',
             'latitude'=>'-6.8069664',
             'longitude'=>'110.8404898'
@@ -116,6 +121,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Kota Kudus',
             'lokasi_kos'=>'Demaan',
             'latitude'=>'-6.8047881',
             'longitude'=>'110.8390994'
@@ -133,6 +139,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Jati',
             'lokasi_kos'=>'Jepang',
             'latitude'=>'-6.819738',
             'longitude'=>'110.8574228'
@@ -150,6 +157,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Jati',
             'lokasi_kos'=>'Jepang',
             'latitude'=>'-6.8204602',
             'longitude'=>'110.8568973'
@@ -167,6 +175,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Campuran',
+            'kecamatan' => 'Mejobo',
             'lokasi_kos'=>'Getas',
             'latitude'=>'-6.8153171',
             'longitude'=>'110.8395933'
@@ -184,6 +193,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak ada makanan di dalam kamar, Mengganti seprai secara berkala',
             'peraturan_kos'=> 'Tidak ada tamu yang diperbolehkan masuk setelah pukul 22.00',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Mejobo',
             'lokasi_kos'=>'Getas',
             'latitude'=>'-6.8149288',
             'longitude'=>'110.8432153'
@@ -202,6 +212,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Jati',
             'lokasi_kos'=>'Ngembal',
             'latitude'=>'-6.8068852',
             'longitude'=>'110.8762083'
@@ -219,6 +230,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Jati',
             'lokasi_kos'=>'Ngembal',
             'latitude'=>'-6.8049509',
             'longitude'=>'110.8765427'
@@ -236,6 +248,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putri',
+            'kecamatan' => 'Kota Kudus',
             'lokasi_kos'=>'Nganguk',
             'latitude'=>'-6.8066098',
             'longitude'=>'110.8472706'
@@ -253,6 +266,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Mengunci pintu saat keluar, Menjaga kebersihan pribadi',
             'peraturan_kos'=> 'Tidak membawa tamu ke dalam kos, Menggunakan fasilitas dengan bijak',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Kota Kudus',
             'lokasi_kos'=>'Nganguk',
             'latitude'=>'-6.8074549',
             'longitude'=>'110.8470171'
@@ -270,6 +284,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putra',
+            'kecamatan' => 'Kota',
             'lokasi_kos'=>'Purwosari',
             'latitude'=>'-6.8104789',
             'longitude'=>'110.8209854'
@@ -287,6 +302,7 @@ class ProductSeeder extends Seeder
             // 'peraturan_kamar'=> 'Tidak merokok di dalam kamar, Mengunci pintu saat keluar',
             'peraturan_kos'=> 'Tidak membawa hewan peliharaan, Jaga kebersihan lingkungan',
             'tipe_kamar'=> 'Putri',
+            'kecamatan' => 'Kota',
             'lokasi_kos'=>'Purwosari',
             'latitude'=>'-6.8095603',
             'longitude'=>'110.8222951'

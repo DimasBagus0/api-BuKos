@@ -9,6 +9,7 @@ use App\Models\order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Validator;
 
 class OrderController extends Controller
@@ -198,6 +199,44 @@ class OrderController extends Controller
             }
         }
     }
+    public function getOrderOwners()
+    {
+        // Pastikan pengguna yang memanggil fungsi ini adalah pemilik (owner)
+        if (Auth::check() && Auth::user()->role === 'owner') {
+            // Dapatkan semua pesanan yang telah dibuat
+            $orders = Order::all();
+
+            // Inisialisasi array untuk menyimpan data pesanan
+            $orderOwners = [];
+
+            foreach ($orders as $order) {
+                $user = User::find($order->user_id);
+                $product = Product::find($order->product_id);
+
+                if ($user && $product) {
+                    $orderOwners[] = [
+                        'order_id' => $order->id,
+                        'Nama Penyewa' => $user->name,
+                        'Email' => $user->email,
+                        'product_name' => $product, // Ubah ini sesuai dengan atribut produk yang ingin ditampilkan
+                    ];
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Daftar Penyewa Dan Daftar Pesanan',
+                'data' => $orderOwners,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Anda tidak memiliki izin untuk mengakses data pesanan dan pemiliknya.',
+                'data' => null,
+            ], 403); // Kode status 403 menunjukkan akses ditolak
+        }
+    }
+
     public function userTransactions()
 {
     $user = Auth::user();

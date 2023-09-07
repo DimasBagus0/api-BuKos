@@ -62,6 +62,7 @@ class ProductController extends Controller
             'foto_pemilik'=>'required|image|mimes:jpeg,png,svg,jpg,gif,jfif|max:3000',
             'nama_pemilik'=>['required', 'string', 'max:50'],
             'nama_kos'=>['required', 'string', 'max:50'],
+            'kecamatan'=>['required', 'string',],
             'lokasi_kos'=>['required', 'string',],
             'harga_kos'=>['required', 'numeric',],
             'spesifikasi_kamar'=>['string',],
@@ -111,6 +112,7 @@ class ProductController extends Controller
                 'foto_pemilik'=> $file_request->storeAs('person', $file_name),
                 'nama_pemilik'=> $request->nama_pemilik,
                 'nama_kos'=> $request->nama_kos,
+                'kecamatan'=> $request->kecamatan,
                 'lokasi_kos'=> $request->lokasi_kos,
                 'harga_kos'=> $request->harga_kos,
                 'spesifikasi_kamar'=> $request->spesifikasi_kamar,
@@ -180,11 +182,12 @@ class ProductController extends Controller
 }
 
 
-    public function search(Request $request)
+public function search(Request $request)
 {
     $searchQuery = $request->input('search_product');
     $filterByType = $request->input('Filter_kos');
     $searchDesa = $request->input('search_desa');
+    $filterByKecamatan = $request->input('Filter_kecamatan'); // Tambahkan filter kecamatan
 
     $query = Product::query();
 
@@ -200,12 +203,17 @@ class ProductController extends Controller
         $query->where('lokasi_kos', 'like', '%' . $searchDesa . '%');
     }
 
+    if ($filterByKecamatan) {
+        // Tambahkan filter berdasarkan kecamatan
+        $query->where('kecamatan', $filterByKecamatan);
+    }
+
     $product = $query->get();
 
     if ($product->isEmpty()) {
         return response()->json([
             'success' => false,
-            'message' => 'Kos Tidak Di Temukan',
+            'message' => 'Kos Tidak Ditemukan',
             'data' => null,
         ]);
     }
@@ -216,6 +224,7 @@ class ProductController extends Controller
         'data' => $product
     ]);
 }
+
 
 
 

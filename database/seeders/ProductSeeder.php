@@ -34,7 +34,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Bae',
             'lokasi_kos'=>'Bacin',
             'latitude'=>'-6.789075',
-            'longitude'=>'110.850234'
+            'longitude'=>'110.850234',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_2.png',
@@ -52,7 +53,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Bae',
             'lokasi_kos'=>'Bacin',
             'latitude'=>'-6.787682',
-            'longitude'=>'110.848527'
+            'longitude'=>'110.848527',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_3.jpg',
@@ -70,7 +72,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Gebog',
             'lokasi_kos'=>'Besito',
             'latitude'=>'-6.7512822',
-            'longitude'=>'110.8430177'
+            'longitude'=>'110.8430177',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_4.jpg',
@@ -88,7 +91,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Gebog',
             'lokasi_kos'=>'Besito',
             'latitude'=>'-6.751123',
-            'longitude'=>'110.843848'
+            'longitude'=>'110.843848',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_5.jpg',
@@ -106,7 +110,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Kota Kudus',
             'lokasi_kos'=>'Demaan',
             'latitude'=>'-6.8069664',
-            'longitude'=>'110.8404898'
+            'longitude'=>'110.8404898',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_6.jpeg',
@@ -124,7 +129,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Kota Kudus',
             'lokasi_kos'=>'Demaan',
             'latitude'=>'-6.8047881',
-            'longitude'=>'110.8390994'
+            'longitude'=>'110.8390994',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_7.jpg',
@@ -142,7 +148,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Jati',
             'lokasi_kos'=>'Jepang',
             'latitude'=>'-6.819738',
-            'longitude'=>'110.8574228'
+            'longitude'=>'110.8574228',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_8.jpg',
@@ -160,7 +167,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Jati',
             'lokasi_kos'=>'Jepang',
             'latitude'=>'-6.8204602',
-            'longitude'=>'110.8568973'
+            'longitude'=>'110.8568973',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_9.jpeg',
@@ -178,7 +186,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Mejobo',
             'lokasi_kos'=>'Getas',
             'latitude'=>'-6.8153171',
-            'longitude'=>'110.8395933'
+            'longitude'=>'110.8395933',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_10.jpg',
@@ -196,7 +205,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Mejobo',
             'lokasi_kos'=>'Getas',
             'latitude'=>'-6.8149288',
-            'longitude'=>'110.8432153'
+            'longitude'=>'110.8432153',
+            'approved' => true
 
         ]);
         Product::create([
@@ -215,7 +225,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Jati',
             'lokasi_kos'=>'Ngembal',
             'latitude'=>'-6.8068852',
-            'longitude'=>'110.8762083'
+            'longitude'=>'110.8762083',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_12.jpg',
@@ -233,7 +244,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Jati',
             'lokasi_kos'=>'Ngembal',
             'latitude'=>'-6.8049509',
-            'longitude'=>'110.8765427'
+            'longitude'=>'110.8765427',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_13.jpg',
@@ -251,7 +263,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Kota Kudus',
             'lokasi_kos'=>'Nganguk',
             'latitude'=>'-6.8066098',
-            'longitude'=>'110.8472706'
+            'longitude'=>'110.8472706',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_14.png',
@@ -269,7 +282,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Kota Kudus',
             'lokasi_kos'=>'Nganguk',
             'latitude'=>'-6.8074549',
-            'longitude'=>'110.8470171'
+            'longitude'=>'110.8470171',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_15.jpg',
@@ -287,7 +301,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Kota',
             'lokasi_kos'=>'Purwosari',
             'latitude'=>'-6.8104789',
-            'longitude'=>'110.8209854'
+            'longitude'=>'110.8209854',
+            'approved' => true
         ]);
         Product::create([
             'foto_kos' => 'fotokos/kos_16.jpg',
@@ -305,7 +320,8 @@ class ProductSeeder extends Seeder
             'kecamatan' => 'Kota',
             'lokasi_kos'=>'Purwosari',
             'latitude'=>'-6.8095603',
-            'longitude'=>'110.8222951'
+            'longitude'=>'110.8222951',
+            'approved' => true
         ]);
         $products = Product::all();
 

@@ -216,9 +216,9 @@ class OrderController extends Controller
                 if ($user && $product) {
                     $orderOwners[] = [
                         'order_id' => $order->id,
-                        'Nama Penyewa' => $user->name,
+                        'Nama_Penyewa' => $user->name,
                         'Email' => $user->email,
-                        'product_name' => $product, // Ubah ini sesuai dengan atribut produk yang ingin ditampilkan
+                        'kos_yang_di_sewa' => $product, // Ubah ini sesuai dengan atribut produk yang ingin ditampilkan
                     ];
                 }
             }

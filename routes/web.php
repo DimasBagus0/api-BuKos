@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 
 /*
@@ -21,6 +22,8 @@ Route::get('/finish', function () {return view('finish');
 Route::get('/payment/{id}', [OrderController::class, 'index']);
 Route::post('/checkout', [OrderController::class, 'checkout']);
 Route::get('/invoice/{id}', [OrderController::class, 'invoice']);
+
+Route::get('/verify-mail/{token}',[AuthController::class,'verificationMail']);
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', function () {

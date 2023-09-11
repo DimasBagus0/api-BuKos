@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
-
+use Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Support\Facades\Auth;
 
@@ -217,5 +220,71 @@ public function getLoggedInUsers()
         return response()->json([
             'message' => 'Logout sebagai pemilik berhasil'
         ]);
+    }
+
+    public function sendVerifyMail($email)
+    {
+        if(auth()->user()){
+
+            $user = User::where('email', $email)->get();
+            if(count($user) > 0){
+
+                $random = Str::random(40);
+                $domain = URL::to('/');
+                $url = $domain.'/verify-mail/'.$random;
+
+                $data['url'] = $url;
+                $data['email'] = $email;
+                $data['title'] = "Verifikasi Email Anda - Tindakan Di Perlukan";
+                $data['name'] ="Pengguna BuKos";
+                $data['body'] = "Terima kasih telah mendaftar di platform kami. Untuk menyelesaikan pengaturan akun Anda dan memastikan keamanan informasi Anda, kami mohon Anda melakukan verifikasi alamat email Anda dengan mengikuti petunjuk di bawah ini:";
+
+                Mail::send('verifyMail', ['data'=>$data], function($message) use($data){
+                    $message->to($data['email'])->subject($data['title']);
+                });
+
+                $user = User::find($user[0]['id']);
+                $user->remember_token = $random;
+                $user->save();
+
+                return response()->json([
+                    'succes'=>true,
+                    'message'=> 'Mail Berhasil di kirim'
+                ]);
+
+
+            }else{
+                return response()->json([
+                    'succes' => false,
+                    'message' => 'User Not Found'
+                ]);
+            }
+
+        }
+        else{
+            return response()->json([
+                'succes' => false,
+                'message' => 'Unauthenticated'
+            ]);
+        }
+
+    }
+
+    public function verificationMail($token)
+    {
+        $user = User::where('remember_token',$token)->get();
+        if(count($user) > 0){
+
+            $datetime = Carbon::now()->format('Y-m-d H:i:s');
+            $user = User::find($user[0]['id']);
+            $user->remember_token = '';
+            $user->is_verified = 1;
+            $user->email_verified_at = $datetime;
+            $user->save();
+
+            return view('succes');
+        }else{
+            return view('404');
+        }
     }
 }

@@ -17,6 +17,8 @@ use App\Http\Controllers\OrderController;
 | is assigned the "api" middleware group. Enjoy building your API!
 */
 
+Route::middleware('auth:sanctum')->get('/send-verify-mail/{email}', [AuthController::class, 'sendVerifyMail']);
+
 // Grup rute untuk pengguna dengan peran 'user'
 Route::prefix('user')->name('user.')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register');

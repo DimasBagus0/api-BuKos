@@ -24,6 +24,10 @@ Route::post('/checkout', [OrderController::class, 'checkout']);
 Route::get('/invoice/{id}', [OrderController::class, 'invoice']);
 
 Route::get('/verify-mail/{token}',[AuthController::class,'verificationMail']);
+Route::get('/reset-password',[AuthController::class,'resetPasswordLoad']);
+Route::post('/reset-password',[AuthController::class,'resetPassword']);
+
+
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', function () {

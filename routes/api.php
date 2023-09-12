@@ -17,6 +17,8 @@ use App\Http\Controllers\OrderController;
 | is assigned the "api" middleware group. Enjoy building your API!
 */
 
+Route::post('/forget-password', [AuthController::class, 'forgetPassword']);
+
 Route::middleware('auth:sanctum')->get('/send-verify-mail/{email}', [AuthController::class, 'sendVerifyMail']);
 
 // Grup rute untuk pengguna dengan peran 'user'
@@ -38,7 +40,8 @@ Route::prefix('owner')->name('owner.')->group(function () {
     Route::post('/loginadmin', [AuthController::class, 'loginAdmin'])->name('loginadmin');
     Route::post('/logoutadmin', [AuthController::class, 'logoutAdmin'])->middleware(['auth:sanctum', 'role:admin']);
     Route::middleware(['auth:sanctum', 'role:admin'])->put('/products/{id}/approve', [ProductController::class, 'approve'])->name('products.approve');
-    Route::middleware(['auth:sanctum', 'role:admin'])->get('/products/approved', [ProductController::class, 'getApproved'])->name('products.approved');
+    Route::middleware(['auth:sanctum', 'role:admin'])->get('/products/approved', [ProductController::class, 'getapprove'])->name('products.approved');
+    Route::middleware(['auth:sanctum', 'role:admin'])->get('/products/unapproved', [ProductController::class, 'getUnapprovedProducts'])->name('products.unapproved');
     Route::middleware(['auth:sanctum', 'role:admin'])->get('/getloginuser', [AuthController::class, 'getLoggedInUsers']);
 
 

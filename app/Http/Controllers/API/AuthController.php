@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Mail;
 use App\Models\User;
 use App\Models\Product;
-use Mail;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Request;
+use App\Models\PasswordReset;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class AuthController extends Controller
 {
@@ -286,5 +288,84 @@ public function getLoggedInUsers()
         }else{
             return view('404');
         }
+    }
+
+    public function forgetPassword(Request $request)
+    {
+        try {
+
+            $user = User::where('email', $request->email)->get();
+            if(count($user) > 0){
+
+                $token = Str::random(40);
+                $domain = URL::to('/');
+                $url = $domain.'/reset-password?token='.$token;
+
+                $data['url'] = $url;
+                $data['email'] = $request->email;
+                $data['title'] = "Password Reset";
+                $data['body'] = "Klik Disini Untuk mereset password anda";
+
+                Mail::send('forgetPasswordMail', ['data'=>$data], function($message) use ($data){
+                    $message->to($data['email'])->subject($data['title']);
+                });
+
+                $datetime = Carbon::now()->format('Y-m-d H:i:s');
+                PasswordReset::UpdateOrCreate(
+                    ['email' => $request->email],
+                    [
+                        'email' => $request->email,
+                        'token' => $token,
+                        'created_at' => $datetime
+                    ]
+                    );
+
+                    return response()->json([
+                        'succes' => true,
+                        'message' => 'Please Check your email for reset password'
+                    ]);
+            }
+            else{
+                return response()->json([
+                    'succes' => false,
+                    'message' => 'User Not Found'
+                ]);
+            }
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'succes' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function resetPasswordLoad(Request $request)
+    {
+        $resetdata = PasswordReset::where('token',$request->token)->get();
+        if(isset($request->token) && count($resetdata) > 0){
+
+            $user = User::where('email', $resetdata[0]['email'])->get();
+            return view('resetPassword', compact('user'));
+
+        }
+        else{
+            return view('404');
+        }
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'password'=> 'required|string|min:8|confirmed'
+        ]);
+
+        $user = User::find($request->id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        PasswordReset::where('email', $user->email)->delete();
+
+        return "<h1>Password Kamu Berhasil Di Ganti<h1>";
     }
 }

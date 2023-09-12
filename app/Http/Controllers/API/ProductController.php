@@ -535,6 +535,27 @@ public function approve($id)
     ], Response::HTTP_OK);
 }
 
+public function getUnapprovedProducts()
+{
+    $user = Auth::user();
+
+    if (!$user) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda harus login untuk melihat produk yang belum diapprove.',
+            'unapproved' => null,
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    // Mendapatkan daftar produk yang belum diapprove oleh pengguna
+    $unapproved = Product::whereNotIn('id', $user->approved()->pluck('product_id'))->get();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Daftar produk yang belum diapprove.',
+        'unapproved' => $unapproved,
+    ], Response::HTTP_OK);
+}
 
 
 public function getapprove()
@@ -553,7 +574,7 @@ public function getapprove()
 
     return response()->json([
         'success' => true,
-        'message' => 'Daftar produk favorit.',
+        'message' => 'Daftar produk approved.',
         'Approved' => $approved,
     ], Response::HTTP_OK);
 }
